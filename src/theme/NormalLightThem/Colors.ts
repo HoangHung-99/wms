@@ -64,8 +64,5 @@ export default {
     order_status_6: LightAppColors.order_status_6,
     order_status_7: LightAppColors.order_status_7,
     order_status_8: LightAppColors.order_status_8,
-    trip_chart_1: LightAppColors.trip_chart_1,
-    trip_chart_2: LightAppColors.trip_chart_2,
-    trip_chart_3: LightAppColors.trip_chart_3,
   },
 };

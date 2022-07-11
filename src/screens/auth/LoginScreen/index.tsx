@@ -1,28 +1,24 @@
 import React, {useState} from 'react';
-import {View, ScrollView, Image, StyleSheet} from 'react-native';
-import {TextInput} from 'react-native-paper';
+import {View, StyleSheet} from 'react-native';
 
-import {IMAGES} from '~/assets/images';
-
+import {NormalInput} from '~/components/CInput';
 import {TouchableButton} from '~/components/CButton';
 
-import Styles from '~/theme/Styles';
 import {connectToRedux} from '~/@helpers/utils';
-import {configEnv} from '.~/@config';
 import toastService from '~/services/toast/toast.service';
 import {AppActions} from '~/stores/actions';
-import {FButton} from '~/components/FButton';
-import {signIn} from '~/API/Auth/ApiService';
 import {createTokenSelector} from '~/stores/selectors/PersistentStorageSelectors';
+import {createScreenSelector} from '~/stores/selectors/ThemeSelectors';
 
 interface IProps {
-  loginSync: Function;
+  loginSync?: Function;
+  ScreenAlign?: {[styleName: string]: object};
 }
 
 const LoginScreen = (props: IProps) => {
-  const {loginSync} = props;
-  const [passWord, setPassWord] = useState('1234');
-  const [userName, setUserName] = useState('hung1');
+  const {loginSync, ScreenAlign} = props;
+  const [passWord, setPassWord] = useState('');
+  const [userName, setUserName] = useState('');
   const [passSecureTextEntry, setPassSecureTextEntry] = useState(true);
 
   const checkValueValidate = () => {
@@ -46,10 +42,9 @@ const LoginScreen = (props: IProps) => {
 
   const handlePressLoginButton = async () => {
     try {
-      //   if (!checkValueValidate()) {
-      //     return;
-      //   }
-      console.log('login');
+      if (!checkValueValidate()) {
+        return;
+      }
       loginSync({
         user: userName,
         pass: passWord,
@@ -59,8 +54,44 @@ const LoginScreen = (props: IProps) => {
     }
   };
   return (
-    <View style={Styles.ScreenAlign.Container}>
-      <TouchableButton title={'Login'} btnType="Primary" width={0.5} />
+    <View style={ScreenAlign.Container}>
+      <NormalInput
+        type="circle"
+        placeholder={'Username'}
+        width={0.8}
+        onChangeText={value => setUserName(value)}
+        returnKeyType={'next'}
+        placeholderTextColor="#979797"
+        onSubmitEditing={() => {}}
+        value={userName}
+        leftIcon={{
+          type: 'font-awesome',
+          name: 'user',
+          //   color: primary,
+        }}
+      />
+      <NormalInput
+        type="circle"
+        width={0.8}
+        placeholder={'Password'}
+        onChangeText={value => setPassWord(value)}
+        returnKeyType={'next'}
+        placeholderTextColor="#979797"
+        onSubmitEditing={() => {}}
+        secureTextEntry={passSecureTextEntry}
+        value={passWord}
+        leftIcon={{
+          type: 'font-awesome',
+          name: 'user',
+          //   color: primary,
+        }}
+      />
+      <TouchableButton
+        title={'Login'}
+        btnType="Primary"
+        // width={0.5}
+        onPress={() => handlePressLoginButton('login')}
+      />
     </View>
   );
 };
@@ -69,52 +100,11 @@ export default connectToRedux({
   component: LoginScreen,
   stateProps: (state: any) => ({
     token: createTokenSelector()(state),
+    ScreenAlign: createScreenSelector()(state),
   }),
   dispatchProps: (dispatch: any) => {
     return {
       loginSync: (evt: any) => dispatch(AppActions.loginSync(evt)),
     };
-  },
-});
-
-const styles = StyleSheet.create({
-  backgroundImage: {
-    flex: 1,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  container: {
-    alignItems: 'center',
-    flex: 1,
-    // width: '100%',
-    // height: '100%',
-  },
-  logoWrapper: {
-    width: '100%',
-    marginTop: 30,
-    height: 80,
-  },
-  logoImage: {
-    width: '100%',
-    height: '100%',
-  },
-  welcomeTitle: {
-    marginTop: 12,
-    alignSelf: 'center',
-  },
-  subTitle: {
-    alignSelf: 'center',
-  },
-  bodyWrapper: {
-    marginTop: '10%',
-    width: '100%',
-    alignItems: 'center',
-  },
-  loginButtonContainer: {
-    width: '90%',
-  },
-  loginText: {
-    textAlign: 'center',
   },
 });

@@ -1,11 +1,10 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {connectToRedux} from '~/@helpers/utils';
-import {
-  createButtonSelector,
-  createScreenSelector,
-} from '~/stores/selectors/ThemeSelectors';
+import {createButtonSelector} from '~/stores/selectors/ThemeSelectors';
+
 import {ButtonTypes} from '~/common/constants';
+import {ESize} from '~/common/enum';
 
 export type BtnType =
   | 'Primary'
@@ -13,10 +12,7 @@ export type BtnType =
   | 'PrimaryOutline'
   | 'GrayOutline';
 
-interface IBtn {
-  ScreenAlign?: {
-    [styleName: string]: object;
-  };
+interface IBtn extends TouchableOpacity {
   Button?: {
     [styleName: string]: {
       titleStyle?: object;
@@ -29,7 +25,7 @@ interface IBtn {
 }
 
 const ButtonComponents = (props: IBtn) => {
-  const {width, ScreenAlign, Button, title, btnType} = props;
+  const {width = 0.5, Button, title, btnType, ...rest} = props;
   let buttonStyle = {};
   let titleStyle = {};
   switch (btnType) {
@@ -56,11 +52,8 @@ const ButtonComponents = (props: IBtn) => {
   }
 
   return (
-    <View
-      style={
-        width === 0.5 ? {...ScreenAlign.HalfWidth} : {...ScreenAlign.FullWidth}
-      }>
-      <TouchableOpacity style={buttonStyle}>
+    <View style={{width: width * ESize.widthScreen}}>
+      <TouchableOpacity style={buttonStyle} {...rest}>
         <Text style={titleStyle}>{title}</Text>
       </TouchableOpacity>
     </View>
@@ -71,7 +64,6 @@ export default connectToRedux({
   component: ButtonComponents,
   stateProps: (state: any) => ({
     Button: createButtonSelector()(state),
-    ScreenAlign: createScreenSelector()(state),
   }),
   dispatchProps: () => {
     return {};

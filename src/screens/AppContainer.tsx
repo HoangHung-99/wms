@@ -22,7 +22,6 @@ interface AppContainer {
 
 const AppContainer = (props: AppContainer) => {
   const {status} = props;
-  console.log('login', JSON.stringify(store.getState()));
 
   //   if (isLoadingStart) {
   //     return <SplashScreen />;
