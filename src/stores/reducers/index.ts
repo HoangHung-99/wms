@@ -1,11 +1,13 @@
 import {combineReducers} from '@reduxjs/toolkit';
 import AppReducer from './AppReducers';
 import LoadingReducer from './LoadingReducer';
-import PersistentStorageReducer from './PersistentStorageReducer';
+import PersistentStorageReducer from './PersistentStorageReducers';
+import ThemeReducer from './ThemeReducers';
 
 const rootReducer = combineReducers({
-  loading: LoadingReducer,
   app: AppReducer,
+  loading: LoadingReducer,
+  theme: ThemeReducer,
   persistentStorage: PersistentStorageReducer,
 });
 

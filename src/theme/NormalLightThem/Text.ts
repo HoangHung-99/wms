@@ -21,7 +21,7 @@ export default {
       fontSize: NormalFontSize.smallText,
     },
   },
-  fonts: {
+  Fonts: {
     roboto: FontFamily.roboto,
     robotoMedium: FontFamily.robotoMedium,
     robotoBold: FontFamily.robotoBold,

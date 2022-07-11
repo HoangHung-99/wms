@@ -1,9 +1,5 @@
-import {
-  authApiService,
-  loginApiService,
-} from '../../../services/networks/api.service';
+import {authApiService, loginApiService} from '~/services/networks/api.service';
 import {UserLogin} from '../Interface';
-
 import EndPoint from '../EndPoint';
 
 const signIn = async (body: UserLogin.LoginRequest) => {

@@ -2,8 +2,8 @@ import {IObjectPromise} from '~/@helpers/utils';
 import {
   AxiosHttpClient,
   IAxiosRequestOptions,
-} from '../../@helpers/network/AxiosHttpClient';
-import {configEnv} from '../../@config';
+} from '~/@helpers/network/AxiosHttpClient';
+import {configEnv} from '~/@config';
 
 // const timeout = 10000;
 export class ApiService {

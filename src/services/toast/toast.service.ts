@@ -1,6 +1,6 @@
 // import FToast from './FToast';
 
-import {ApiException} from '../../@helpers/network/common';
+import {ApiException} from '~/@helpers/network/common';
 import i18next from 'i18next';
 
 const DURATION = 2000;

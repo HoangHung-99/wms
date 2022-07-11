@@ -1,4 +1,10 @@
 import AppActionType from './AppActions';
 import LoadingActionType from './LoadingActions';
 import PersistentStorageActionType from './PersistentStorageActions';
-export {AppActionType, LoadingActionType, PersistentStorageActionType};
+import ThemeActionType from './ThemeActions';
+export {
+  AppActionType,
+  LoadingActionType,
+  PersistentStorageActionType,
+  ThemeActionType,
+};

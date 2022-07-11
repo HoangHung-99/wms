@@ -3,14 +3,14 @@ import {call, put, takeLatest, all} from 'redux-saga/effects';
 import {LoadingActions, PersistentStorageActions} from '../actions';
 import {AppActionType} from '../actionTypes';
 
-import {signIn} from '../../API/Auth/ApiService';
+import {signIn} from '~/API/Auth/ApiService';
 import {UserLogin} from '~/API/Auth/Interface';
+import toastService from '~/services/toast/toast.service';
 
 // import toastService from '~/services/toast/toast.service';
 
 function* login(action?: {payload: UserLogin.LoginRequest}) {
   try {
-    console.log(action);
     yield put(LoadingActions.start());
     const result: {
       status: boolean;
@@ -24,12 +24,9 @@ function* login(action?: {payload: UserLogin.LoginRequest}) {
         token: token,
       }),
     );
-
     yield put(LoadingActions.stop());
   } catch (error) {
-    console.log(error);
-
-    // toastService.handlerException(error);
+    toastService.handlerException(error);
     yield put(LoadingActions.stop());
     yield put(
       PersistentStorageActions.setAuthen({

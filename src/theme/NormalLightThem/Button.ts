@@ -5,6 +5,11 @@ import {
   NormalFontSize,
 } from '../variables';
 
+const center = {
+  justifyContent: 'center',
+  alignItems: 'center',
+};
+
 export default {
   Button: {
     titleStyle: {
@@ -13,10 +18,10 @@ export default {
     primary: {
       titleStyle: {
         fontSize: NormalFontSize.text,
-
         color: LightAppColors.white,
       },
       buttonStyle: {
+        ...center,
         backgroundColor: LightAppColors.primary,
         height: ButtonHeight.normal,
       },
@@ -27,6 +32,7 @@ export default {
         color: LightAppColors.primary,
       },
       buttonStyle: {
+        ...center,
         backgroundColor: LightAppColors.white,
         height: ButtonHeight.normal,
         borderWidth: 1,
@@ -39,6 +45,7 @@ export default {
         color: LightAppColors.white,
       },
       buttonStyle: {
+        ...center,
         backgroundColor: LightAppColors.clear,
         height: ButtonHeight.normal,
       },
@@ -49,6 +56,7 @@ export default {
         color: LightAppColors.grey2,
       },
       buttonStyle: {
+        ...center,
         backgroundColor: LightAppColors.clear,
         borderWidth: 1,
         borderColor: LightAppColors.grey2,

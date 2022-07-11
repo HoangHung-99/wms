@@ -1,16 +1,19 @@
 import React, {useState} from 'react';
-import {View, ScrollView, Image, StyleSheet, Button} from 'react-native';
+import {View, ScrollView, Image, StyleSheet} from 'react-native';
 import {TextInput} from 'react-native-paper';
 
-import {IMAGES} from '../../../assets/images';
+import {IMAGES} from '~/assets/images';
 
-import Styles from '../../../theme/Styles';
-import {connectToRedux} from '../../../@helpers/utils';
-import {configEnv} from '../../../@config';
-import toastService from '../../../services/toast/toast.service';
-import {AppActions} from '../../../stores/actions';
-import {FButton} from '../../../components/FButton';
-import {signIn} from '../../../API/Auth/ApiService';
+import {TouchableButton} from '~/components/CButton';
+
+import Styles from '~/theme/Styles';
+import {connectToRedux} from '~/@helpers/utils';
+import {configEnv} from '.~/@config';
+import toastService from '~/services/toast/toast.service';
+import {AppActions} from '~/stores/actions';
+import {FButton} from '~/components/FButton';
+import {signIn} from '~/API/Auth/ApiService';
+import {createTokenSelector} from '~/stores/selectors/PersistentStorageSelectors';
 
 interface IProps {
   loginSync: Function;
@@ -18,12 +21,12 @@ interface IProps {
 
 const LoginScreen = (props: IProps) => {
   const {loginSync} = props;
-  const [pass, setPass] = useState('1234');
+  const [passWord, setPassWord] = useState('1234');
   const [userName, setUserName] = useState('hung1');
   const [passSecureTextEntry, setPassSecureTextEntry] = useState(true);
 
   const checkValueValidate = () => {
-    if (!userName && !pass) {
+    if (!userName && !passWord) {
       //   toastService.error(i18next.t('empty_user_and_pass_err'));
       toastService.error('empty_user_and_pass_err');
       return false;
@@ -33,7 +36,7 @@ const LoginScreen = (props: IProps) => {
       toastService.error('empty_user_err');
       return false;
     }
-    if (!pass) {
+    if (!passWord) {
       //   toastService.error(i18next.t('empty_pass_err'));
       toastService.error('empty_pass_err');
       return false;
@@ -47,23 +50,17 @@ const LoginScreen = (props: IProps) => {
       //     return;
       //   }
       console.log('login');
-      //   loginSync({
-      //     user: userName,
-      //     pass: pass,
-      //   });
-      let res = await signIn({
+      loginSync({
         user: userName,
-        pass: pass,
+        pass: passWord,
       });
-      console.log(res);
-      
     } catch (error) {
       console.log('eeee', error);
     }
   };
   return (
-    <View>
-      <Button title="login" onPress={() => handlePressLoginButton()} />
+    <View style={Styles.ScreenAlign.Container}>
+      <TouchableButton title="Login" btnType="PrimaryOutline" />
     </View>
   );
 };
@@ -71,7 +68,7 @@ const LoginScreen = (props: IProps) => {
 export default connectToRedux({
   component: LoginScreen,
   stateProps: (state: any) => ({
-    // token: createTokenSelector()(state),
+    token: createTokenSelector()(state),
   }),
   dispatchProps: (dispatch: any) => {
     return {

@@ -6,11 +6,13 @@ import {
 } from '../stores/selectors/PersistentStorageSelectors';
 import {connectToRedux} from '../@helpers/utils';
 
-import AppStack from '../navigators/AppStack';
-import AuthStack from '../navigators/AuthStack';
+import AppStack from '~/navigators/AppStack';
+import AuthStack from '~/navigators/AuthStack';
 import SplashScreen from './shared/SplashScreen';
-import PersistentStorageActions from '../stores/actions/PersistentStorageActions';
-import AppActions from '../stores/actions/AppActions';
+import PersistentStorageActions from '~/stores/actions/PersistentStorageActions';
+import AppActions from '~/stores/actions/AppActions';
+
+import {store} from '~/stores';
 
 interface AppContainer {
   isLoadingStart: boolean;
@@ -20,7 +22,7 @@ interface AppContainer {
 
 const AppContainer = (props: AppContainer) => {
   const {status} = props;
-  console.log(status);
+  console.log('login', JSON.stringify(store.getState()));
 
   //   if (isLoadingStart) {
   //     return <SplashScreen />;

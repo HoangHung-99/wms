@@ -1,7 +1,7 @@
 const LightAppColors = {
   primaryDark: '#006600',
   primaryLight: '#00AD0F',
-  primary: '#007500',
+  primary: '#F79256',
   secondary: '#2ECC71',
   white: '#FFFFFF',
   black: '#000000',
@@ -33,9 +33,6 @@ const LightAppColors = {
   veryPaleGreen: '#F6FFED',
   brightBlue: '#2F54EB',
   veryPaleBlue: '#F0F5FF',
-  trip_chart_1: '#FA541C',
-  trip_chart_2: '#52C41A',
-  trip_chart_3: '#2F54EB',
   chart1: '#D9D9D9',
   chart2: '#1890FF',
   chart3: '#FA8C16',

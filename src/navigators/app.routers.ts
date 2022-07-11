@@ -1,4 +1,4 @@
-import HomeScreen from '../screens/app/HomeScreen';
+import HomeScreen from '~/screens/app/HomeScreen';
 
 const appRouters = {
   HomeScreen,

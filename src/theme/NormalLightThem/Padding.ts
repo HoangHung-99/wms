@@ -1,7 +1,7 @@
 import {PaddingValue} from '../variables';
 
 export default {
-  paddings: {
+  Paddings: {
     none: PaddingValue.none,
     text: PaddingValue.text,
     heading: PaddingValue.heading,

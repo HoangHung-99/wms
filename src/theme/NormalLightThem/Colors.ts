@@ -1,7 +1,7 @@
 import {LightAppColors} from '../variables';
 
 export default {
-  colors: {
+  Colors: {
     primaryDark: LightAppColors.primaryDark,
     primaryLight: LightAppColors.primaryLight,
     primary: LightAppColors.primary,
