@@ -117,7 +117,6 @@ const NormalInput = (props: ITextInput) => {
 
   const {
     clearTextOnFocus,
-    type = 'default',
     forwardRef,
     autoFocus,
     showSoftInputOnFocus = true,
