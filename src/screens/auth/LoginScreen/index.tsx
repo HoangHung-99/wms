@@ -60,7 +60,7 @@ const LoginScreen = (props: IProps) => {
   };
   return (
     <View style={Styles.ScreenAlign.Container}>
-      <TouchableButton title="Login" btnType="PrimaryOutline" />
+      <TouchableButton title={'Login'} btnType="Primary" width={0.5} />
     </View>
   );
 };

@@ -3,6 +3,7 @@ import {
   FontFamily,
   LightAppColors,
   NormalFontSize,
+  RoundStyles,
 } from '../variables';
 
 const center = {
@@ -24,6 +25,7 @@ export default {
         ...center,
         backgroundColor: LightAppColors.primary,
         height: ButtonHeight.normal,
+        borderRadius: RoundStyles.round4,
       },
     },
     primaryOutline: {
@@ -37,6 +39,7 @@ export default {
         height: ButtonHeight.normal,
         borderWidth: 1,
         borderColor: LightAppColors.primary,
+        borderRadius: RoundStyles.round4,
       },
     },
     primaryClear: {
@@ -48,6 +51,7 @@ export default {
         ...center,
         backgroundColor: LightAppColors.clear,
         height: ButtonHeight.normal,
+        borderRadius: RoundStyles.round4,
       },
     },
     grayOutline: {
@@ -62,6 +66,7 @@ export default {
         borderColor: LightAppColors.grey2,
         borderStyle: 'solid',
         height: ButtonHeight.normal,
+        borderRadius: RoundStyles.round4,
       },
     },
   },

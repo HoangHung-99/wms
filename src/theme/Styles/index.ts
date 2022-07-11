@@ -2,8 +2,8 @@ import {ESize} from '../../common/enum';
 
 export default {
   ScreenAlign: {
-    HalfWidth: (ESize.widthScreen - 30) / 2,
-    FullWidth: ESize.widthScreen - 22,
+    HalfWidth: {width: (ESize.widthScreen - 30) / 2},
+    FullWidth: {width: ESize.widthScreen - 22},
     Container: {
       flex: 1,
       justifyContent: 'center',

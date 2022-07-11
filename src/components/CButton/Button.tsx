@@ -1,7 +1,11 @@
 import React from 'react';
-import {Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import {connectToRedux} from '~/@helpers/utils';
-import {createButtonSelector} from '~/stores/selectors/ThemeSelectors';
+import {
+  createButtonSelector,
+  createScreenSelector,
+} from '~/stores/selectors/ThemeSelectors';
+import {ButtonTypes} from '~/common/constants';
 
 export type BtnType =
   | 'Primary'
@@ -10,6 +14,9 @@ export type BtnType =
   | 'GrayOutline';
 
 interface IBtn {
+  ScreenAlign?: {
+    [styleName: string]: object;
+  };
   Button?: {
     [styleName: string]: {
       titleStyle?: object;
@@ -18,48 +25,45 @@ interface IBtn {
   };
   title?: string;
   btnType?: BtnType;
+  width?: number;
 }
 
 const ButtonComponents = (props: IBtn) => {
-  const {Button, title, btnType} = props;
-  let Styles = [];
+  const {width, ScreenAlign, Button, title, btnType} = props;
+  let buttonStyle = {};
+  let titleStyle = {};
   switch (btnType) {
-    case 'Primary':
-      Styles = [
-        {...Button.primary.buttonStyle},
-        {...Button.primary.titleStyle},
-      ];
+    case ButtonTypes.Primary:
+      buttonStyle = {...Button.primary.buttonStyle};
+      titleStyle = {...Button.primary.titleStyle};
       break;
-    case 'PrimaryClear':
-      Styles = [
-        {...Button.primaryClear.buttonStyle},
-        {...Button.primaryClear.titleStyle},
-      ];
+    case ButtonTypes.PrimaryClear:
+      buttonStyle = {...Button.primaryClear.buttonStyle};
+      titleStyle = {...Button.primaryClear.titleStyle};
       break;
-    case 'PrimaryOutline':
-      Styles = [
-        {...Button.primaryOutline.buttonStyle},
-        {...Button.primaryOutline.titleStyle},
-      ];
+    case ButtonTypes.PrimaryOutline:
+      buttonStyle = {...Button.primaryOutline.buttonStyle};
+      titleStyle = {...Button.primaryOutline.titleStyle};
       break;
-    case 'GrayOutline':
-      Styles = [
-        {...Button.grayOutline.buttonStyle},
-        {...Button.grayOutline.titleStyle},
-      ];
+    case ButtonTypes.GrayOutline:
+      buttonStyle = {...Button.grayOutline.buttonStyle};
+      titleStyle = {...Button.grayOutline.titleStyle};
       break;
     default:
-      Styles = [
-        {...Button.primary.buttonStyle},
-        {...Button.primary.titleStyle},
-      ];
+      buttonStyle = {...Button.primary.buttonStyle};
+      titleStyle = {...Button.primary.titleStyle};
       break;
   }
 
   return (
-    <TouchableOpacity style={Styles}>
-      <Text>{title}</Text>
-    </TouchableOpacity>
+    <View
+      style={
+        width === 0.5 ? {...ScreenAlign.HalfWidth} : {...ScreenAlign.FullWidth}
+      }>
+      <TouchableOpacity style={buttonStyle}>
+        <Text style={titleStyle}>{title}</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
@@ -67,6 +71,7 @@ export default connectToRedux({
   component: ButtonComponents,
   stateProps: (state: any) => ({
     Button: createButtonSelector()(state),
+    ScreenAlign: createScreenSelector()(state),
   }),
   dispatchProps: () => {
     return {};
